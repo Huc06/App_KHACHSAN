@@ -1,251 +1,57 @@
 
+// screens/Screen6.js
+import React from 'react';
+import { View, Text, FlatList, TouchableOpacity, StyleSheet, Image } from 'react-native';
 
-// import React, { useState, useEffect } from 'react';
-// import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
-// import Icon from 'react-native-vector-icons/FontAwesome'; // Import thư viện biểu tượng
+const productsData = [
+  {
+    id: '1',
+    title: 'Áo Thun Trắng',
+    description: 'Áo thun cotton chất lượng cao.',
+    price: '200 USD',
+    image: 'https://th.bing.com/th/id/OIP.GOMpePRjUIIFgc7gCH7_UgHaHa?w=209&h=209&c=7&r=0&o=5&pid=1.7',
+  },
+  {
+    id: '2',
+    title: 'Quần Jean',
+    description: 'Quần jean thời trang, thoải mái.',
+    price: '400 USD',
+    image: 'https://th.bing.com/th/id/OIP.GdMU0lKLnKYxPD-xl20O9QHaLC?w=184&h=275&c=7&r=0&o=5&pid=1.7',
+  },
+  {
+    id: '3',
+    title: 'Giày Sneaker',
+    description: 'Giày sneaker thể thao, phong cách.',
+    price: '800 USD',
+    image: 'https://th.bing.com/th/id/OIP.9HxczLa4iR2eSN08vT7BmgHaEo?w=272&h=180&c=7&r=0&o=5&pid=1.7',
+  },
+];
 
-// const ProductScreen = ({ navigation }) => {
-//   const [quantity, setQuantity] = useState(1);
-//   const [isSaved, setIsSaved] = useState(false); // Trạng thái lưu sản phẩm
-//   const [rating, setRating] = useState(0); // Giá trị rating
-//   const ratingsData = [5, 4, 4, 5, 3]; // Mock data for ratings
-
-//   useEffect(() => {
-//     setRating(calculateAverageRating(ratingsData));
-//   }, []);
-
-//   const calculateAverageRating = (ratings) => {
-//     const total = ratings.reduce((acc, curr) => acc + curr, 0);
-//     return (total / ratings.length).toFixed(1); // Format to one decimal place
-//   };
-
-//   const increaseQuantity = () => {
-//     setQuantity(prevQuantity => prevQuantity + 1);
-//   };
-
-//   const decreaseQuantity = () => {
-//     setQuantity(prevQuantity => (prevQuantity > 1 ? prevQuantity - 1 : 1));
-//   };
-
-//   const toggleSave = () => {
-//     setIsSaved(!isSaved);
-//   };
-
-//   return (
-//     <View style={styles.container}>
-//       <Image
-//         source={{ uri: 'https://images.pexels.com/photos/28039050/pexels-photo-28039050/free-photo-of-macbook-pro.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1' }} // Thay thế bằng URL ảnh thực tế
-//         style={styles.image}
-//       />
-//       <Text style={styles.title}>Minimal Stand</Text>
-      
-//       <View style={styles.priceQuantityContainer}>
-//         <Text style={styles.price}>$50</Text>
-//         <View style={styles.quantityContainer}>
-//           <TouchableOpacity onPress={decreaseQuantity} style={styles.button}>
-//             <Text style={styles.buttonText}>-</Text>
-//           </TouchableOpacity>
-//           <Text style={styles.quantityText}>{quantity}</Text>
-//           <TouchableOpacity onPress={increaseQuantity} style={styles.button}>
-//             <Text style={styles.buttonText}>+</Text>
-//           </TouchableOpacity>
-//         </View>
-//       </View>
-
-//       <View style={styles.ratingContainer}>
-//         <Icon name="star" size={20} color="#FFD700" />
-//         <TouchableOpacity onPress={() => navigation.navigate('Screen5')}>
-//           <Text style={styles.rating}>{rating} (50 reviews)</Text>
-//         </TouchableOpacity>
-//       </View>
-
-//       <Text style={styles.description}>
-//         Minimal Stand is made of natural wood. The design that is very simple and minimal.
-//       </Text>
-
-//       <View style={styles.actionContainer}>
-//         <TouchableOpacity style={styles.addToCartButton} onPress={() => alert('Added to cart')}>
-//           <Text style={styles.addToCartText}>Add to cart</Text>
-//         </TouchableOpacity>
-//         <TouchableOpacity onPress={toggleSave} style={styles.saveButton}>
-//           <Icon name={isSaved ? "bookmark" : "bookmark-o"} size={24} color="#000000" />
-//         </TouchableOpacity>
-//       </View>
-//     </View>
-//   );
-// };
-
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     padding: 20,
-//     backgroundColor: '#fff',
-//   },
-//   image: {
-//     width: '100%',
-//     height: 300,
-//     borderRadius: 10,
-//   },
-//   title: {
-//     fontSize: 24,
-//     fontWeight: 'bold',
-//     marginVertical: 10,
-//   },
-//   price: {
-//     fontSize: 20,
-//     color: 'green',
-//     marginRight: 10,
-//   },
-//   priceQuantityContainer: {
-//     flexDirection: 'row',
-//     alignItems: 'center',
-//     marginVertical: 20,
-//   },
-//   quantityContainer: {
-//     flexDirection: 'row',
-//     alignItems: 'center',
-//     marginLeft: 20,
-//   },
-//   button: {
-//     width: 40,
-//     height: 40,
-//     backgroundColor: '#000000',
-//     borderRadius: 5,
-//     justifyContent: 'center',
-//     alignItems: 'center',
-//     marginHorizontal: 5,
-//   },
-//   buttonText: {
-//     color: '#fff',
-//     fontSize: 20,
-//   },
-//   quantityText: {
-//     fontSize: 20,
-//     fontWeight: 'bold',
-//   },
-//   ratingContainer: {
-//     flexDirection: 'row',
-//     alignItems: 'center',
-//     marginVertical: 10,
-//   },
-//   rating: {
-//     fontSize: 16,
-//     marginLeft: 5,
-//   },
-//   actionContainer: {
-//     flexDirection: 'row',
-//     alignItems: 'center',
-//     marginTop: 20,
-//   },
-//   addToCartButton: {
-//     flex: 1,
-//     height: 50,
-//     backgroundColor: '#000000',
-//     borderRadius: 8,
-//     justifyContent: 'center',
-//     alignItems: 'center',
-//     marginRight: 20, // Tăng khoảng cách giữa các nút
-//   },
-//   addToCartText: {
-//     color: '#fff',
-//     fontSize: 16,
-//     fontWeight: 'bold',
-//   },
-//   saveButton: {
-//     width: 50,
-//     height: 50,
-//     justifyContent: 'center',
-//     alignItems: 'center',
-//   },
-// });
-
-
-// export default ProductScreen;
-
-import React, { useState, useEffect } from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
-
-const ProductScreen = ({ navigation }) => {
-  const [quantity, setQuantity] = useState(1);
-  const [isSaved, setIsSaved] = useState(false);
-  const [rating, setRating] = useState(0);
-  const ratingsData = [5, 4, 4, 5, 3];
-
-  useEffect(() => {
-    setRating(calculateAverageRating(ratingsData));
-  }, []);
-
-  const calculateAverageRating = (ratings) => {
-    const total = ratings.reduce((acc, curr) => acc + curr, 0);
-    return (total / ratings.length).toFixed(1);
-  };
-
-  const increaseQuantity = () => {
-    setQuantity(prevQuantity => prevQuantity + 1);
-  };
-
-  const decreaseQuantity = () => {
-    setQuantity(prevQuantity => (prevQuantity > 1 ? prevQuantity - 1 : 1));
-  };
-
-  const toggleSave = () => {
-    setIsSaved(!isSaved);
-  };
-
-  const addToCart = () => {
-    const product = {
-      id: '1',
-      title: 'Minimal Stand',
-      price: 50, // Giá không có ký hiệu đô la
-      quantity: quantity,
-    };
-    const totalPrice = product.price * product.quantity; // Tính tổng giá trị
-    // Navigate to Cart screen with the product and total price
-    navigation.navigate('Cart', { cartItems: [product], totalPrice }); // Truyền tổng giá trị
-  };
+const Screen6 = ({ navigation }) => {
+  const renderProductItem = ({ item }) => (
+    <View style={styles.productCard}>
+      <Image source={{ uri: item.image }} style={styles.productImage} />
+      <Text style={styles.productTitle}>{item.title}</Text>
+      <Text style={styles.productDescription}>{item.description}</Text>
+      <Text style={styles.productPrice}>{item.price}</Text>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate('ProductDetail', { product: item })} // Chuyển đến màn hình mới với thông tin sản phẩm
+      >
+        <Text style={styles.buttonText}>Xem Mô Tả</Text>
+      </TouchableOpacity>
+    </View>
+  );
 
   return (
     <View style={styles.container}>
-      <Image
-        source={{ uri: 'https://images.pexels.com/photos/28039050/pexels-photo-28039050/free-photo-of-macbook-pro.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1' }} 
-        style={styles.image}
+      <Text style={styles.header}>Chào Mừng Đến Với Cửa Hàng Của Chúng Tôi</Text>
+      <FlatList
+        data={productsData}
+        renderItem={renderProductItem}
+        keyExtractor={(item) => item.id}
+        contentContainerStyle={styles.productList}
       />
-      <Text style={styles.title}>Minimal Stand</Text>
-      
-      <View style={styles.priceQuantityContainer}>
-        <Text style={styles.price}>$50</Text>
-        <View style={styles.quantityContainer}>
-          <TouchableOpacity onPress={decreaseQuantity} style={styles.button}>
-            <Text style={styles.buttonText}>-</Text>
-          </TouchableOpacity>
-          <Text style={styles.quantityText}>{quantity}</Text>
-          <TouchableOpacity onPress={increaseQuantity} style={styles.button}>
-            <Text style={styles.buttonText}>+</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-
-      <View style={styles.ratingContainer}>
-        <Icon name="star" size={20} color="#FFD700" />
-        <TouchableOpacity onPress={() => navigation.navigate('Screen5')}>
-          <Text style={styles.rating}>{rating} (50 reviews)</Text>
-        </TouchableOpacity>
-      </View>
-
-      <Text style={styles.description}>
-        Minimal Stand is made of natural wood. The design is very simple and minimal.
-      </Text>
-
-      <View style={styles.actionContainer}>
-        <TouchableOpacity style={styles.addToCartButton} onPress={addToCart}>
-          <Text style={styles.addToCartText}>Add to cart</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={toggleSave} style={styles.saveButton}>
-          <Icon name={isSaved ? "bookmark" : "bookmark-o"} size={24} color="#000000" />
-        </TouchableOpacity>
-      </View>
     </View>
   );
 };
@@ -253,85 +59,55 @@ const ProductScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
-    backgroundColor: '#fff',
+    padding: 16,
+    backgroundColor: '#f2f2f2',
   },
-  image: {
-    width: '100%',
-    height: 300,
-    borderRadius: 10,
-  },
-  title: {
+  header: {
     fontSize: 24,
     fontWeight: 'bold',
-    marginVertical: 10,
+    marginBottom: 16,
+    textAlign: 'center',
   },
-  price: {
-    fontSize: 20,
-    color: 'green',
-    marginRight: 10,
+  productList: {
+    paddingBottom: 16,
   },
-  priceQuantityContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginVertical: 20,
+  productCard: {
+    backgroundColor: '#fff',
+    borderRadius: 8,
+    padding: 16,
+    marginBottom: 16,
+    elevation: 2,
   },
-  quantityContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginLeft: 20,
+  productImage: {
+    width: '100%',
+    height: 150,
+    borderRadius: 8,
+    marginBottom: 8,
+  },
+  productTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginVertical: 4,
+  },
+  productDescription: {
+    fontSize: 14,
+    color: '#555',
+  },
+  productPrice: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginVertical: 8,
   },
   button: {
-    width: 40,
-    height: 40,
-    backgroundColor: '#000000',
-    borderRadius: 5,
-    justifyContent: 'center',
+    backgroundColor: '#007aff',
+    borderRadius: 8,
+    padding: 12,
     alignItems: 'center',
-    marginHorizontal: 5,
   },
   buttonText: {
     color: '#fff',
-    fontSize: 20,
-  },
-  quantityText: {
-    fontSize: 20,
     fontWeight: 'bold',
-  },
-  ratingContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginVertical: 10,
-  },
-  rating: {
-    fontSize: 16,
-    marginLeft: 5,
-  },
-  actionContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginTop: 20,
-  },
-  addToCartButton: {
-    flex: 1,
-    height: 50,
-    backgroundColor: '#000000',
-    borderRadius: 8,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginRight: 20,
-  },
-  addToCartText: {
-    color: '#fff',
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-  saveButton: {
-    width: 50,
-    height: 50,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
 });
 
-export default ProductScreen;
+export default Screen6;

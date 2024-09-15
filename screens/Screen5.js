@@ -5,29 +5,29 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 const reviews = [
   {
     id: '1',
-    title: 'Coffee Table',
-    price: '$50.00',
+    title: 'Áo Thun',
+    price: '$200',
     date: '20/03/2020',
-    content: 'Nice furniture with good delivery. The delivery time is very fast...',
-    image: 'https://images.pexels.com/photos/28039050/pexels-photo-28039050/free-photo-of-macbook-pro.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', // Thay thế bằng URL hình ảnh thực tế
-    rating: 4, // Số sao
+    content: 'Thiết kế đơn giản với màu sắc trung tính, dễ dàng phối đồ với nhiều loại trang phục khác.',
+    image: 'https://th.bing.com/th/id/OIP.GOMpePRjUIIFgc7gCH7_UgHaHa?w=209&h=209&c=7&r=0&o=5&pid=1.7', // Thay thế bằng URL hình ảnh thực tế
+    rating: 4, 
   },
   {
     id: '2',
-    title: 'Coffee Table',
-    price: '$50.00',
+    title: 'Quần Jean',
+    price: '$400',
     date: '20/03/2020',
-    content: 'Giá Rẻ',
-    image: 'https://images.pexels.com/photos/28039050/pexels-photo-28039050/free-photo-of-macbook-pro.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    content: 'Quần jean này có thiết kế cổ điển với màu xanh đậm, được làm từ chất liệu denim bền bỉ.',
+    image: 'https://th.bing.com/th/id/OIP.GdMU0lKLnKYxPD-xl20O9QHaLC?w=184&h=275&c=7&r=0&o=5&pid=1.7',
     rating: 5,
   },
   {
     id: '3',
-    title: 'Coffee Table',
-    price: '$50.00',
+    title: 'Giày',
+    price: '$800',
     date: '20/03/2020',
-    content: 'Hay Lắm',
-    image: 'https://images.pexels.com/photos/28039050/pexels-photo-28039050/free-photo-of-macbook-pro.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    content: 'Đôi giày này có thiết kế thể thao, phù hợp cho nhiều hoạt động khác nhau. ',
+    image: 'https://th.bing.com/th/id/OIP.9HxczLa4iR2eSN08vT7BmgHaEo?w=272&h=180&c=7&r=0&o=5&pid=1.7',
     rating: 3,
   },
 ];

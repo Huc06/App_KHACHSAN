@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, Button } from 'react-native';
 import { CommonActions } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -14,7 +14,6 @@ const LoginScreen = ({ navigation }) => {
   };
 
   useEffect(() => {
-    // Lấy thông tin đăng nhập từ AsyncStorage (nếu có)
     const loadUserData = async () => {
       try {
         const storedEmail = await AsyncStorage.getItem('userEmail');
@@ -24,7 +23,7 @@ const LoginScreen = ({ navigation }) => {
           setPassword(storedPassword);
         }
       } catch (error) {
-        Alert.alert('Đã xảy ra lỗi khi tải thông tin');
+        Alert.alert('Error loading user data');
       }
     };
     loadUserData();
@@ -32,16 +31,15 @@ const LoginScreen = ({ navigation }) => {
 
   const handleLogin = async () => {
     if (!validateEmail(email)) {
-      Alert.alert('Email không hợp lệ');
+      Alert.alert('Invalid email');
       return;
     }
 
     if (!validatePassword(password)) {
-      Alert.alert('Mật khẩu không hợp lệ. Mật khẩu phải có ít nhất 6 ký tự.');
+      Alert.alert('Invalid password. Must be at least 6 characters long.');
       return;
     }
 
-    // Kiểm tra thông tin đăng nhập với thông tin đã lưu trong AsyncStorage
     try {
       const storedEmail = await AsyncStorage.getItem('userEmail');
       const storedPassword = await AsyncStorage.getItem('userPassword');
@@ -55,15 +53,15 @@ const LoginScreen = ({ navigation }) => {
           })
         );
       } else {
-        Alert.alert('Đăng nhập thất bại!');
+        Alert.alert('Login failed!');
       }
     } catch (error) {
-      Alert.alert('Đã xảy ra lỗi khi kiểm tra thông tin');
+      Alert.alert('Error checking credentials');
     }
   };
 
   const validateEmail = (email) => {
-    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(String(email).toLowerCase());
   };
 
@@ -73,35 +71,33 @@ const LoginScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-    <Text style={styles.title}>HELLO!</Text>
-      <Text style={styles.title}>WELCOME BACK</Text>
-      {/* <Text style={styles.titleS}>LAB6_072204005387</Text> */}
+      <Text style={styles.title}>ĐĂNG NHẬP</Text>
       <TextInput
         style={styles.input}
         placeholder="Email"
         value={email}
         onChangeText={setEmail}
+        keyboardType="email-address"
+        autoCapitalize="none"
       />
       <TextInput
+        placeholder="Password"
         style={styles.input}
-        placeholder="Nhập mật khẩu"
+        secureTextEntry={!isPasswordVisible}
         value={password}
         onChangeText={setPassword}
-        secureTextEntry={!isPasswordVisible}
       />
-      <TouchableOpacity onPress={togglePasswordVisibility} style={styles.button}>
-        <Text style={styles.buttonText}>
-          {isPasswordVisible ? 'Ẩn' : 'Hiện'} mật khẩu
-        </Text>
+      <TouchableOpacity onPress={togglePasswordVisibility} style={styles.togglePasswordButton}>
+        <Text>{isPasswordVisible ? "Hide" : "Show"}</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.button} onPress={handleLogin}>
         <Text style={styles.buttonText}>Log in</Text>
       </TouchableOpacity>
       <TouchableOpacity
-        style={styles.buttons}
+        style={styles.signupButton}
         onPress={() => navigation.navigate('Screen3')}
       >
-        <Text style={styles.buttonTexts}>SIGH UP</Text>
+        <Text style={styles.buttonText}>SIGN UP</Text>
       </TouchableOpacity>
     </View>
   );
@@ -136,31 +132,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginVertical: 12,
   },
-  buttons: {
-    backgroundColor: 'transparent', // Đặt màu nền thành trong suốtP@PP@
+  signupButton: {
+    backgroundColor: 'transparent',
     padding: 10,
     alignItems: 'center',
   },
   buttonText: {
-    color: '#fff',
+    color: '#333',
     fontSize: 16,
     fontWeight: 'bold',
   },
-  buttonTexts: {
-    color: '#000',
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-  titleS: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#ffffff',
-    backgroundColor: '#6200ee',
-    textAlign: 'left',
-    position: 'absolute',
-    top: 20,
-    left: 0,
-    width: '100%',
+  togglePasswordButton: {
+    alignSelf: 'flex-end',
+    marginRight: '10%',
   },
 });
 

@@ -7,7 +7,6 @@ const RegisterScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState(''); 
-  const [Name, setName] = useState('');
 
   const validatePassword = (password) => {
     // Kiểm tra mật khẩu có ít nhất một chữ cái viết hoa, một chữ cái viết thường, và một số
@@ -59,13 +58,7 @@ const RegisterScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>WELCOME</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Name"
-        value={Name}
-        onChangeText={setName}
-      />
+      <Text style={styles.title}>ĐĂNG KÝ</Text>
       <TextInput
         style={styles.input}
         placeholder="Email"
